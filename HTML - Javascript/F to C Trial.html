@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+
+<html>
+
+<body>
+
+
+<h1>Fahrenheit to Celsius</h1>
+
+
+
+<p>
+
+<label for="n1">Fahrenheit Value:</label> 
+
+<input id="n1" name="n1" type="number">
+
+
+
+<button onclick="FtoC()"> Compute </button>
+
+</p>
+
+ 
+
+<p>
+
+<label for="product" id="conversion">The temperature is:</label>  
+
+<input id="product" name="product" type="number" readonly></input>
+
+</p>
+
+
+
+<script>
+
+function FtoC()
+
+{
+
+  var x;
+
+
+
+  // Retrieve the user input 
+
+  x = document.getElementById("n1").value*1;  // *1 Converts the result to number
+
+
+
+  console.log(x);
+
+
+
+  // Compute the sum
+
+  let x  = (5/9) * (n1-32);
+
+
+
+  // Display the result
+
+  document.getElementById("conversion").innerHTML='The temperature of is:'+x+'';
+
+   document.getElementById("product").value=x;
+
+
+
+}
+
+   
+
+</script>
+
+</body>
+
+</html>

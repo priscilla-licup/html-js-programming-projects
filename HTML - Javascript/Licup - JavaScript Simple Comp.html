@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+
+<html>
+
+<body>
+
+
+
+
+<h1>Fahrenheit to Celsius</h1>
+
+<label for="n1">Fahrenheit Value:</label> 
+<input id="n1" name="n1" type="number">
+
+<button onclick="FtoC()"> Compute </button>
+
+<h2 id="FC"></h2>
+
+
+
+<h1>Celsius to Fahrenheit</h1>
+
+<label for="n2">Celsius Value:</label> 
+<input id="n2" name="n2" type="number">
+
+<button onclick="CtoF()"> Compute </button>
+
+<h2 id="CF"></h2>
+
+
+
+<h1>Meters to Feet</h1>
+
+<label for="n3">Meter Value:</label> 
+<input id="n3" name="n3" type="number">
+
+<button onclick="MtoF()"> Compute </button>
+
+<h2 id="MF"></h2>
+
+
+
+<h1>Feet to Meters</h1>
+
+<label for="n4">Feet Value:</label> 
+<input id="n4" name="n4" type="number">
+
+<button onclick="FtoM()"> Compute </button>
+
+<h2 id="FM"></h2>
+
+
+
+
+<script>
+
+
+function FtoC() {
+
+  let x = document.getElementById("n1").value;
+
+  let y = (5/9) * (x-32);
+
+  document.getElementById("FC").innerHTML = 'The temperature is ' +y+ ' degrees Celsius.';
+
+}
+
+
+function CtoF() {
+
+  let x = document.getElementById("n2").value;
+
+  let y = (x * 9/5) + 32;
+
+  document.getElementById("CF").innerHTML = 'The temperature is ' +y+ ' degrees Fahrenheit.';
+
+}   
+
+
+function MtoF() {
+
+  let x = document.getElementById("n3").value;
+
+  let y = (x * 3.281);
+
+  document.getElementById("MF").innerHTML = 'The measurement is ' +y+ ' feet.';
+
+}   
+
+
+function FtoM() {
+
+  let x = document.getElementById("n4").value;
+
+  let y = (x / 3.281);
+
+  document.getElementById("FM").innerHTML = 'The measurement is ' +y+ ' meters.';
+
+}   
+
+
+</script>
+
+</body>
+
+</html>

@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+</head>
+
+<body onload="payroll2()">
+
+
+
+<h1>Simple Payroll</h1>
+
+
+
+<p>
+
+<label for="en">Employee Name:</label>    
+<input id="en" name="en" type="text"></input>
+
+<label for="dw">Days Worked:</label>
+<input id="dw" name="dw" type="number" oninput="computeamount()"></input>
+</p>
+
+<p>
+    <label for="dr">Daily Rate:</label>
+    <input id="dr" name="dr" type="number" oninput="computeamount()"></input>
+    
+    <label for="da">Deduction Amount:</label>
+    <input id="da" name="da" type="number" oninput="computeamount()"></input>
+    
+    <button onclick="addemployee()">Add Employee</button>
+</p>
+
+<p>
+
+<label for="emp">Number of Employees:</label>
+<input id="emp" name="emp" type="number" readonly></input>
+
+
+<label for="demp">Delete Employee:</label>
+<input id="demp" name="demp" type="number" ></input>
+
+<button onclick="deleteemployee()" >Delete</button>  
+
+</p>
+
+
+
+<p id="payroll"></p>
+
+<script>
+
+
+
+
+
+    // Initialize cart      
+
+    function payroll2(){
+
+        payroll=[];
+
+        document.getElementById("emp").value= payroll.length;
+
+        document.getElementById("payroll").innerHTML="";
+
+
+
+            
+
+    }
+
+
+
+
+
+    // Add item to cart
+
+    function addemployee(){
+
+         
+
+         var emplo = {
+             "en": "",
+
+             "dw": 0,
+
+             "dr": 1,
+
+             "da": 1,
+
+             "emgp" : function emgp(){
+
+                return Math.round(this.dw*this.dr*100)/100;  
+
+                },
+            "emnp" : function emnp(){
+
+                return (this.emgp()-this.da);  
+
+                }
+
+            };
+
+
+
+          //emplo.item=document.getElementById("itemdesc").value;
+
+          emplo.en=document.getElementById("en").value;
+
+          emplo.dw=document.getElementById("dw").value;
+
+          emplo.dr=document.getElementById("dr").value;
+
+          emplo.da=document.getElementById("da").value;
+
+
+
+          console.log(emplo.dw);
+
+          console.log(emplo.dr);
+
+          console.log(emplo.da);
+
+
+
+
+
+           payroll.push(emplo);
+
+          //cart[cart.length]=cartitem;
+
+
+
+          console.log(payroll.length);
+
+          document.getElementById("emp").value=payroll.length;
+
+
+          showlist()
+
+
+    }
+
+
+
+    // Compute Amount per Item
+
+    function computeamount() {
+
+          var w,a,r,no,gp,np;
+
+          w = document.getElementById("dw").value*1;
+
+          a = document.getElementById("da").value*1;
+
+          r = document.getElementById("dr").value*1;
+
+
+          
+
+          gp = Math.round(w*r*100)/100;
+
+          np = Math.round((gp - a)*100)/100;
+
+
+
+
+        
+          console.log(gp);
+          console.log(np);
+
+
+
+          //document.getElementById("amount").value=a;
+
+        
+
+    }    
+
+    
+
+    // Delete item from chart
+
+    function deleteemployee(){
+
+        var todelete;
+
+        var empnum;
+
+
+
+        empnum=document.getElementById("demp").value;
+
+
+
+        todelete=confirm("Delete employee no. "+empnum+"?");
+
+
+
+        if (todelete) {
+
+
+
+            payroll.splice(empnum-1,1);
+
+            document.getElementById("emp").value=payroll.length;
+
+             showlist();   
+
+        }
+
+
+
+    }
+
+
+
+    // Show the contents of the cart
+
+    function showlist(){
+
+
+
+        var i,l,payrolltext,ln;
+
+        var theader,tbody,tb,tfooter;
+
+
+
+    
+
+        // Generate table header;
+
+        theader ="<thead>";
+
+        theader+="<tr>";
+
+        theader+="<th>No.</th>";
+        theader+='<th style="text-align:center" > </th>';
+
+        theader+='<th style="text-align:center" >Employee Name</th>';
+        theader+='<th style="text-align:center" > </th>';
+
+        theader+='<th style="text-align:center" >Days Worked</th>';
+        theader+='<th style="text-align:center" > </th>';
+
+        theader+='<th style="text-align:right">Daily Rate</th>';
+        theader+='<th style="text-align:center" > </th>';
+
+        theader+="<th>Gross Pay</th>";
+        theader+='<th style="text-align:center" > </th>';
+
+        theader+='<th style="text-align:right">Deduction Amount</th>';
+        theader+='<th style="text-align:center" > </th>';
+
+        theader+="<th>Net Pay</th>";
+
+        theader+="</tr>";
+
+        theader+="</thead>";
+
+        
+
+        // Generate Table Body
+
+        l = payroll.length;
+
+      
+
+        
+
+        for (i=0,payrolltext="",tbody='';i<l;i++){
+
+            ln=i+1;    
+
+            tbody += "<tr>"
+
+                +'<td>'+ln+' </td>'
+                +'<td> </td>'
+
+                +'<td style="text-align:center">'+payroll[i].en+'</td>'
+                +'<td> </td>'
+                
+                +'<td style="text-align:center">'+payroll[i].dw+'</td>'
+                +'<td> </td>'
+
+                +'<td style="text-align:center">'+payroll[i].dr+'</td>'
+                +'<td> </td>'
+
+                +'<td style="text-align:center">'+payroll[i].emgp()+'</td>'
+                +'<td> </td>'
+
+                +'<td style="text-align:center">'+payroll[i].da+'</td>'
+                +'<td> </td>'
+
+                +'<td style="text-align:center">'+payroll[i].emnp()+'</td>'
+
+                          
+
+                +"</tr>";
+
+                       
+            
+            //totalamount+=cart[i].itemamount();
+
+          
+
+
+
+        }
+
+
+
+        //tbody += "</tbody>";
+
+
+
+        // Generate table footer;
+
+        tfooter ="<tfoot>";
+
+        tfooter+="<tr>";
+
+        tfooter+='<th style="text-align:left">'+payroll.length+'</th>';
+        tfooter+='<th style="text-align:left"></th>';
+
+        tfooter+='<th style="text-align:left">Employees</th>';
+
+        tfooter+='<th></th>';
+
+        tfooter+="</tr>";
+
+        tfooter+="</tfoot>";
+
+
+
+       console.log(theader+tbody+tfooter);
+
+        document.getElementById("payroll").innerHTML=
+
+           "<table>"+theader+tbody+tfooter+"</table";
+
+
+
+
+
+    }
+
+  
+
+// Global variable
+
+var payroll = []; 
+
+
+
+</script>
+
+</body>
+
+</html>

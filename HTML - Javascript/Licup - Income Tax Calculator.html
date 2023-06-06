@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+
+<html>
+
+<body>
+
+
+
+
+<h1>Income Tax Calculator</h1>
+
+<label for="n1">Taxable Income:</label> 
+<input id="n1" name="n1" type="number">
+
+<button onclick="Tax()"> Compute </button>
+
+<h2 id="TI"></h2>
+
+
+
+
+
+<script>
+
+
+function Tax() {
+
+  let x = document.getElementById("n1").value*1;
+
+    if (x<250000) {
+        TI = (0);
+    }
+    else if (x>250000 && x<=400000) {
+      TI = ((x-250000) * 0.2);
+    }
+    else if (x>400000 && x<=800000) {
+      TI = (30000 + ((x-400000) * 0.25));
+    }
+    else if (x>800000 && x<=2000000) {
+      TI = (130000 + ((x-800000) * 0.3));
+    }
+    else if (x>2000000 && x<=8000000) {
+      TI = (490000 + ((x-2000000) * 0.32));
+    }
+    else {
+      TI = (2410000 + ((x-8000000) * 0.35));
+    }
+    
+
+  document.getElementById("TI").innerHTML = 'The income tax is ' +TI.toLocaleString()+ '.';
+}   
+
+
+</script>
+
+</body>
+
+</html>
